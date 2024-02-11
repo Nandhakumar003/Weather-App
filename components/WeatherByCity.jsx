@@ -12,6 +12,8 @@ const WeatherByCity = () => {
   const [humidity, setHumidity] = useState(0);
   const [windspeed, setWindspeed] = useState(0);
   const [search, setSearch] = useState("");
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
   const [icon, setIcon] = useState(null);
   const [load, setLoad] = useState(false);
   const [errorload, setErrorLoad] = useState(null);
@@ -34,6 +36,8 @@ const WeatherByCity = () => {
       setHumidity(dataFormat.main.humidity);
       setWindspeed(dataFormat.wind.speed);
       setIcon(dataFormat.weather[0].icon);
+      setLat(dataFormat.coord.lat);
+      setLon(dataFormat.coord.lon);
       setLoad(true);
       setErrorLoad(null);
     } else {
@@ -93,6 +97,8 @@ const WeatherByCity = () => {
               city={city}
               humidity={humidity}
               windspeed={windspeed}
+              lat={lat}
+              lon={lon}
             />
           </div>
         </div>

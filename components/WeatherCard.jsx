@@ -5,6 +5,8 @@ const WeatherCard = ({
   country,
   humidity,
   windspeed,
+  lat,
+  lon,
 }) => {
   return (
     <div className="row">
@@ -16,6 +18,10 @@ const WeatherCard = ({
       <div className="d-md-flex justify-content-between">
         <h5>Humidity :{humidity} %</h5>
         <h5>Wind Speed : {windspeed} Km/h</h5>
+      </div>
+      <div className="d-md-flex justify-content-between">
+        <h5>Latitude :{lat}</h5>
+        <h5>Longitude : {lon}</h5>
       </div>
       <button className="btn btn-outline-danger">Show More</button>
     </div>

@@ -48,9 +48,14 @@ const WeatherByCity = () => {
   };
 
   const handleClick = (e) => {
-    searchRef.current.value = "";
-    fetchWeatherData();
-
+    if (search == "") {
+      setErrorLoad("Nothing to Search");
+      setLoad(false);
+    } else {
+      searchRef.current.value = "";
+      setSearch("");
+      fetchWeatherData();
+    }
     e.preventDefault();
   };
   return (
@@ -65,6 +70,7 @@ const WeatherByCity = () => {
               placeholder="Enter the city name"
               onChange={(e) => setSearch(e.target.value)}
               ref={searchRef}
+              value={search}
             />
             <span className="input-group-append">
               <button

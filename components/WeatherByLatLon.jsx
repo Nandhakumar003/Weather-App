@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../pages/Home.css";
 import WeatherCard from "./WeatherCard";
 
@@ -19,11 +19,26 @@ const WeatherByLatLon = () => {
   const [lon, setLon] = useState("");
   const [errorload, setErrorLoad] = useState(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          setSearchlat(position.coords.latitude);
+          setSearchlon(position.coords.longitude);
+        });
+
+        await fetchWeatherData();
+      } catch (err) {
+        console.warn(err.message);
+      }
+    };
+    fetchData();
+  }, []);
+
   const searchlatRef = useRef("");
   const searchlonRef = useRef("");
 
   const fetchWeatherData = async () => {
-    console.log("Testing");
     let data = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${searchlat}&lon=${searchlon}&appid=${API_KEY}&units=metric`
     );

@@ -19,6 +19,7 @@ const WeatherByLatLon = () => {
   const [lon, setLon] = useState("");
   const [errorload, setErrorLoad] = useState(null);
 
+  /*
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,7 +28,29 @@ const WeatherByLatLon = () => {
           setSearchlon(position.coords.longitude);
         });
 
-        await fetchWeatherData();
+        let data = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${searchlat}&lon=${searchlon}&appid=${API_KEY}&units=metric`
+        );
+        let dataFormat = await data.json();
+        console.log(dataFormat);
+
+        if (dataFormat.cod == "200") {
+          setTemp(dataFormat.main.temp);
+          setWeathertext(dataFormat.weather[0].main);
+          setCountry(dataFormat.sys.country);
+          setCity(dataFormat.name);
+          setHumidity(dataFormat.main.humidity);
+          setWindspeed(dataFormat.wind.speed);
+          setIcon(dataFormat.weather[0].icon);
+          setLat(dataFormat.coord.lat);
+          setLon(dataFormat.coord.lon);
+          setLoad(true);
+          setErrorLoad(null);
+        } else {
+          console.log(dataFormat.cod);
+          setErrorLoad(dataFormat.message);
+          setLoad(false);
+        }
       } catch (err) {
         console.warn(err.message);
         setErrorLoad(err.message);
@@ -35,6 +58,7 @@ const WeatherByLatLon = () => {
     };
     fetchData();
   }, []);
+  */
 
   const searchlatRef = useRef("");
   const searchlonRef = useRef("");

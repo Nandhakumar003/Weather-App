@@ -30,6 +30,7 @@ const WeatherByLatLon = () => {
         await fetchWeatherData();
       } catch (err) {
         console.warn(err.message);
+        setErrorLoad(err.message);
       }
     };
     fetchData();
